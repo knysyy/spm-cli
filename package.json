@@ -1,0 +1,36 @@
+{
+  "name": "spm-cli",
+  "version": "0.1.0",
+  "description": "selenium-side-runner project file management cli tool",
+  "main": "index.js",
+  "bin": {
+    "spm": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "rm -rf ./dist && webpack",
+    "dev": "rm -rf ./dist && webpack --config webpack.dev.js",
+    "dev:watch": "npm run dev -- --watch",
+    "tslint-check": "tslint-config-prettier-check ./tslint.json",
+    "fmt": "prettier --write src/**/**.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/inquirer": "^6.5.0",
+    "@types/node": "^12.7.2",
+    "prettier": "^1.18.2",
+    "ts-loader": "^6.0.4",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.5.3",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7",
+    "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "commander": "^3.0.0",
+    "inquirer": "^6.5.1"
+  }
+}
