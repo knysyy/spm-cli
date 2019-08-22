@@ -9,8 +9,8 @@ const parser = new CommandParser(program)
 
 program.version(version, '-v, --version').description(description)
 
-// commands Here
-// Read .side file and extract json
+// Write commands here
+// Read .side file, extract data or main and output to json file
 parser.use(new Extract())
 
 program.parse(process.argv)
