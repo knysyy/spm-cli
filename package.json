@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "commander": "^3.0.0",
-    "inquirer": "^6.5.1"
+    "inquirer": "^6.5.1",
+    "winston": "^3.2.1"
   }
 }

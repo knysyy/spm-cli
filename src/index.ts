@@ -1,5 +1,5 @@
 import { Command } from 'commander'
-import Extract from './lib/extract'
+import Extract from './command/extract'
 import CommandParser from './lib/commandParser'
 
 const { version, description } = require('../package.json')
