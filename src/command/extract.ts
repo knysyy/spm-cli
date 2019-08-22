@@ -1,6 +1,6 @@
 import { Command } from 'commander'
-import { actionRunner } from './errorHandler'
-import commandInterFace from './commandInterFace'
+import { actionRunner } from '../lib/errorHandler'
+import commandInterFace from '../lib/commandInterFace'
 
 type Args = {
     filePath: string
