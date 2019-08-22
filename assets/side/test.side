@@ -81,6 +81,70 @@
       "targets": [],
       "value": ""
     }]
+  }, {
+    "id": "a69a6ccb-5322-4d2d-977a-f913fa38337c",
+    "name": "google",
+    "commands": [{
+      "id": "b5d2e4d0-eedb-4445-bd7a-2456103c09ec",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "59175946-e312-4469-8fba-5520642331c3",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x864",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6149b97e-a9de-42c0-8ff2-4a7eba3a4001",
+      "comment": "",
+      "command": "click",
+      "target": "name=q",
+      "targets": [
+        ["name=q", "name"],
+        ["css=.gLFyf", "css:finder"],
+        ["xpath=//input[@name='q']", "xpath:attributes"],
+        ["xpath=//form[@id='tsf']/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ac7def38-0146-48b4-9d33-3f7770b9899a",
+      "comment": "",
+      "command": "type",
+      "target": "name=q",
+      "targets": [
+        ["name=q", "name"],
+        ["css=.gLFyf", "css:finder"],
+        ["xpath=//input[@name='q']", "xpath:attributes"],
+        ["xpath=//form[@id='tsf']/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div/div/input", "xpath:position"]
+      ],
+      "value": "test"
+    }, {
+      "id": "40aced18-c9e3-4a83-ad46-d1f3afecc3ee",
+      "comment": "",
+      "command": "click",
+      "target": "name=btnK",
+      "targets": [
+        ["name=btnK", "name"],
+        ["css=center:nth-child(2) > .gNO89b", "css:finder"],
+        ["xpath=//input[@name='btnK']", "xpath:attributes"],
+        ["xpath=//form[@id='tsf']/div[2]/div/div[2]/div[2]/div[2]/center/input", "xpath:idRelative"],
+        ["xpath=//center/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "94a16200-b62e-453c-a5b9-3251c3dd2ee7",
+      "comment": "",
+      "command": "verifyTitle",
+      "target": "test - Google 検索",
+      "targets": [],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "b430ae1c-69e2-49f9-b319-d5d30540d2a1",
@@ -90,6 +154,6 @@
     "timeout": 300,
     "tests": ["5e1b666e-c1db-4797-9ef3-fe3a8b38f7a9"]
   }],
-  "urls": [],
+  "urls": ["https://www.google.com/"],
   "plugins": []
 }
