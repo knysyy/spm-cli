@@ -1,15 +1,12 @@
-import winston from 'winston'
+import { createLogger, format, transports, level } from 'winston'
+const { combine, timestamp, label, printf, cli } = format
 
-const format = winston.format
+const myFormat = printf(({ level, message }) => {
+    return `${level}: ${message.trim()}`
+})
 
-export const logger = winston.createLogger({
+export const logger = createLogger({
     level: 'info',
-    format: format.combine(
-        format.timestamp(),
-        format.cli(),
-        format.printf(
-            info => `[${info.timestamp}] ${info.level} ${info.message}`
-        )
-    ),
-    transports: [new winston.transports.Console()],
+    format: format.combine(timestamp(), cli(), myFormat),
+    transports: [new transports.Console()],
 })
