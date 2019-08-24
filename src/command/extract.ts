@@ -21,8 +21,10 @@ export default class Extract implements commandInterFace {
     public use(program: Command) {
         program
             .command('extract')
-            .description('extract data or main from .side')
-            .option('-f, --file-path <filePath>', '.side File to Extract')
+            .description(
+                'Read .side file, extract data or main and output to json file'
+            )
+            .option('-f, --file-path <filePath>', '.side file path')
             .action(actionRunner(this.extractJson.bind(this)))
     }
 
