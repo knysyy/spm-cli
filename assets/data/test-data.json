@@ -1,0 +1,34 @@
+[
+    {
+        "id": "47ed4993-ef9e-4fa1-ab56-0448616dd994",
+        "comment": "",
+        "command": "store",
+        "target": "test1",
+        "targets": [],
+        "value": "test1"
+    },
+    {
+        "id": "f99842ad-08a0-4e9d-ac4b-633e407bb2e1",
+        "comment": "",
+        "command": "store",
+        "target": "test2",
+        "targets": [],
+        "value": "test2"
+    },
+    {
+        "id": "4d520d8a-cd65-4e82-b817-7df7f246e079",
+        "comment": "",
+        "command": "store",
+        "target": "test3",
+        "targets": [],
+        "value": "test4"
+    },
+    {
+        "id": "bb7ef6a3-3592-4e76-b576-fee09504a373",
+        "comment": "",
+        "command": "store",
+        "target": "test1",
+        "targets": [],
+        "value": "test5"
+    }
+]

@@ -1,12 +1,13 @@
-import { createLogger, format, transports, level } from 'winston'
-const { combine, timestamp, label, printf, cli } = format
+import { createLogger, format, transports } from 'winston'
+const { combine, timestamp, printf, cli } = format
 
+// Specifying the format
 const myFormat = printf(({ level, message }) => {
     return `${level}: ${message.trim()}`
 })
 
 export const logger = createLogger({
     level: 'info',
-    format: format.combine(timestamp(), cli(), myFormat),
+    format: combine(timestamp(), cli(), myFormat),
     transports: [new transports.Console()],
 })
