@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/fs-extra": "^8.0.0",
     "@types/inquirer": "^6.5.0",
     "@types/lodash": "^4.14.137",
     "@types/node": "^12.7.2",
@@ -32,6 +33,7 @@
   },
   "dependencies": {
     "commander": "^3.0.0",
+    "fs-extra": "^8.1.0",
     "inquirer": "^6.5.1",
     "lodash": "^4.17.15",
     "winston": "^3.2.1"

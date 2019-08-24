@@ -1,11 +1,11 @@
 import fs from 'fs'
+import fse from 'fs-extra'
 import path from 'path'
 import { Command } from 'commander'
 import { actionRunner } from '../lib/errorHandler'
 import commandInterFace from '../lib/commandInterFace'
 import { logger } from '../lib/logger'
 import inquirer, { QuestionCollection } from 'inquirer'
-import { promisify } from 'util'
 import _ from 'lodash'
 
 const OUTPUT = 'output.json'
@@ -33,14 +33,13 @@ export default class Extract implements commandInterFace {
         logger.info(`filePath : ${this.filePath}`)
 
         // Reading a file
-        const buf = await promisify(fs.readFile)(this.filePath, {
-            encoding: 'utf-8',
-        }).catch(() => {
-            throw new Error('The file could not be read.')
-        })
-        const sideJson: side.Side = JSON.parse(buf)
-        const sideTests: side.Test[] = sideJson.tests
+        const sideJson: side.Side = await fse
+            .readJson(this.filePath)
+            .catch(() => {
+                throw new Error('The file could not be read.')
+            })
 
+        const sideTests: side.Test[] = sideJson.tests
         const choices = _.map(sideTests, 'name')
 
         let questions: QuestionCollection = [
@@ -62,8 +61,7 @@ export default class Extract implements commandInterFace {
         logger.info(`answers: ${JSON.stringify(answers)}`)
 
         const test = sideTests.find(test => test.name === answers.name)
-
-        let commands = test!.commands
+        const commands = test!.commands
 
         if (!commands) {
             logger.error(`test name: ${answers.name}`)
@@ -82,13 +80,9 @@ export default class Extract implements commandInterFace {
                       .value()
 
         // Writing to file
-        await promisify(fs.writeFile)(
-            OUTPUT,
-            JSON.stringify(result, null, '    ')
-        ).catch(err => {
+        await fse.writeJson(OUTPUT, result, { spaces: '    ' }).catch(() => {
             throw new Error('Failed to write file')
         })
-
         logger.info('Exported to output.json.')
     }
 
