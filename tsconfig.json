@@ -3,13 +3,13 @@
     "target": "es2019",
     "module": "commonjs",
     "strict": true,
-    "baseUrl": "./",
+    "baseUrl": "./src/",
     "paths": {
       "*": ["@types/*"]
     },
     "typeRoots": [
-      "src/@types",
-      "node_modules/@types"
+      "./src/@types",
+      "./node_modules/@types"
     ],
     "types": [
       "node"
