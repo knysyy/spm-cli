@@ -26,8 +26,8 @@ export default class Extract implements commandInterFace {
         const sideFactory = new SideFactory(filePath)
         // Reading a file
         const sideJson: SideJson = await sideFactory.factorySideJson()
-        const choices = sideJson.getTestsName()
 
+        const choices = sideJson.getTestsName()
         const questions: QuestionCollection = extractQuestions(choices)
 
         const answers = await inquirer.prompt(questions)

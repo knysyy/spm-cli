@@ -1,19 +1,16 @@
-import commandInterFace from '../lib/commandInterFace'
+import fse from 'fs-extra'
 import { Command } from 'commander'
+import inquirer, { QuestionCollection } from 'inquirer'
+import commandInterFace from '../lib/commandInterFace'
 import { actionRunner } from '../lib/errorHandler'
 import { StoreJsonFactory } from '../models/StoreJsonFactory'
 import { StoreJson } from '../models/StoreJson'
 import { logger } from '../lib/logger'
-import { QuestionCollection } from 'inquirer'
 import { assignQuestions } from '../lib/questions'
-import * as inquirer from 'inquirer'
 
 const OUTPUT = 'output.json'
 
 export default class Assign implements commandInterFace {
-    // .json file path
-    private filePath: string = ''
-
     public use(program: Command) {
         program
             .command('assign')
@@ -29,9 +26,18 @@ export default class Assign implements commandInterFace {
         const storeJsonFactory = new StoreJsonFactory(filePath)
         // Reading a file
         const storeJson: StoreJson = await storeJsonFactory.factoryStoreJson()
+
         const variables = storeJson.getVariableName()
         const questions: QuestionCollection = assignQuestions(variables)
         const answers = await inquirer.prompt(questions)
         logger.info(`answers: ${JSON.stringify(answers)}`)
+
+        const result: side.Command[] = storeJson.assignVariable(answers)
+
+        // writing to file
+        await fse.writeJson(OUTPUT, result, { spaces: '    ' }).catch(() => {
+            throw new Error('Failed to write file')
+        })
+        logger.info('Exported to output.json')
     }
 }
