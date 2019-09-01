@@ -10,10 +10,6 @@ import { extractQuestions } from '../lib/questions'
 
 const OUTPUT = 'output.json'
 
-type Args = {
-    filePath: string
-}
-
 export default class Extract implements commandInterFace {
     public use(program: Command) {
         program
@@ -25,18 +21,14 @@ export default class Extract implements commandInterFace {
             .action(actionRunner(this.extractJson.bind(this)))
     }
 
-    async extractJson(args: Args): Promise<any> {
+    async extractJson(args: arg.DefaultArgs): Promise<any> {
         const filePath = args.filePath
         const sideFactory = new SideFactory(filePath)
-        sideFactory.validate()
-
-        logger.info(`filePath : ${filePath}`)
-
         // Reading a file
         const sideJson: SideJson = await sideFactory.factorySideJson()
         const choices = sideJson.getTestsName()
 
-        let questions: QuestionCollection = extractQuestions(choices)
+        const questions: QuestionCollection = extractQuestions(choices)
 
         const answers = await inquirer.prompt(questions)
         logger.info(`answers: ${JSON.stringify(answers)}`)

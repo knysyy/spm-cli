@@ -1,21 +1,22 @@
 import fse from 'fs-extra'
-import { SideJson } from './SideJson'
+import { StoreJson } from './StoreJson'
 import { Factory } from './Factory'
+import { logger } from '../lib/logger'
 
-export class SideFactory extends Factory {
-    extname: string = '.side'
+export class StoreJsonFactory extends Factory {
+    extname: string = '.json'
 
     constructor(filePath: string) {
         super(filePath)
     }
 
-    async factorySideJson(): Promise<SideJson> {
+    async factoryStoreJson(): Promise<StoreJson> {
         this.validate()
-        const sideJson: side.Side = await fse
+        const storeJson: side.Command[] = await fse
             .readJson(this.filePath)
             .catch(() => {
                 throw new Error('The file could not be read.')
             })
-        return new SideJson(sideJson)
+        return new StoreJson(storeJson)
     }
 }

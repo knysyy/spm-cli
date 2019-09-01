@@ -16,3 +16,15 @@ export const extractQuestions = (choices: string[]): QuestionCollection => {
         },
     ]
 }
+
+export const assignQuestions = (variables: string[]): QuestionCollection => {
+    return variables
+        .filter(variable => variable)
+        .map(variable => {
+            return {
+                type: 'input',
+                name: variable,
+                message: "What's your " + variable,
+            }
+        })
+}
