@@ -18,14 +18,14 @@ export default class Extract implements commandInterFace {
                 'Read .side file, extract data or main and output to json file'
             )
             .option('-f, --file-path <filePath>', '.side file path')
-            .action(actionRunner(this.extractJson.bind(this)))
+            .action(actionRunner(this.extractData.bind(this)))
     }
 
-    async extractJson(args: arg.DefaultArgs): Promise<any> {
+    async extractData(args: arg.DefaultArgs): Promise<any> {
         const filePath = args.filePath
-        const sideFactory = new SideJsonBuilder(filePath)
+        const sideJsonBuilder = new SideJsonBuilder(filePath)
         // Reading a file
-        const sideJson: SideJson = await sideFactory.build()
+        const sideJson: SideJson = await sideJsonBuilder.build()
 
         const choices = sideJson.getTestsName()
         const questions: QuestionCollection = extractQuestions(choices)
@@ -42,6 +42,6 @@ export default class Extract implements commandInterFace {
         await fse.writeJson(OUTPUT, result, { spaces: '    ' }).catch(() => {
             throw new Error('Failed to write file')
         })
-        logger.info('Exported to output.json.')
+        logger.info(`Exported to ${OUTPUT}.`)
     }
 }

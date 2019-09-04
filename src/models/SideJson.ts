@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import uuid4 from 'uuid/v4'
 import { logger } from '../lib/logger'
 
 export class SideJson {
@@ -47,5 +48,35 @@ export class SideJson {
             .dropWhile(command => command.comment !== 'main')
             .filter(command => command.comment !== 'main')
             .value()
+    }
+
+    // TODO リファクタリング
+    replaceId(): side.Side {
+        let newData = this.data
+        let tests = newData.tests
+        let suites = newData.suites
+        let ids = new Map()
+        newData.id = uuid4()
+        tests.map(test => {
+            test.commands.map(command => {
+                command.id = uuid4()
+                return command
+            })
+            let id = test.id
+            let newId = uuid4()
+            test.id = newId
+            ids.set(id, newId)
+            return test
+        })
+        suites.map(suite => {
+            suite.id = uuid4()
+            let suiteTests = suite.tests
+            suiteTests = suiteTests.map(id => ids.get(id))
+            suite.tests = suiteTests
+            return suite
+        })
+        newData.tests = tests
+        newData.suites = suites
+        return newData
     }
 }

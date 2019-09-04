@@ -23,9 +23,9 @@ export default class Assign implements commandInterFace {
 
     async assignData(args: arg.DefaultArgs): Promise<any> {
         const filePath = args.filePath
-        const storeJsonFactory = new StoreJsonBuilder(filePath)
+        const storeJsonBuilder = new StoreJsonBuilder(filePath)
         // Reading a file
-        const storeJson: StoreJson = await storeJsonFactory.build()
+        const storeJson: StoreJson = await storeJsonBuilder.build()
 
         const variables = storeJson.getVariableName()
         const questions: QuestionCollection = assignQuestions(variables)
@@ -38,6 +38,6 @@ export default class Assign implements commandInterFace {
         await fse.writeJson(OUTPUT, result, { spaces: '    ' }).catch(() => {
             throw new Error('Failed to write file')
         })
-        logger.info('Exported to output.json')
+        logger.info(`Exported to ${OUTPUT}.`)
     }
 }
