@@ -1,15 +1,15 @@
 import fse from 'fs-extra'
 import { SideJson } from './SideJson'
-import { Factory } from './Factory'
+import { Builder } from './Builder'
 
-export class SideFactory extends Factory {
+export class SideJsonBuilder extends Builder {
     extname: string = '.side'
 
     constructor(filePath: string) {
         super(filePath)
     }
 
-    async factorySideJson(): Promise<SideJson> {
+    async build(): Promise<SideJson> {
         this.validate()
         const sideJson: side.Side = await fse
             .readJson(this.filePath)

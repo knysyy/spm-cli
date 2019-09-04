@@ -1,14 +1,16 @@
-import * as path from 'path'
-import * as fs from 'fs'
+import path from 'path'
+import fs from 'fs'
 import { logger } from '../lib/logger'
 
-export abstract class Factory {
+export abstract class Builder {
     filePath: string
     abstract extname: string
 
     protected constructor(filePath: string) {
         this.filePath = filePath
     }
+
+    protected abstract build(): Promise<any>
 
     // Perform optional validation
     protected validate(): void {

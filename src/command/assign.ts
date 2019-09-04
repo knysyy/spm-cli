@@ -3,7 +3,7 @@ import { Command } from 'commander'
 import inquirer, { QuestionCollection } from 'inquirer'
 import commandInterFace from '../lib/commandInterFace'
 import { actionRunner } from '../lib/errorHandler'
-import { StoreJsonFactory } from '../models/StoreJsonFactory'
+import { StoreJsonBuilder } from '../models/StoreJsonBuilder'
 import { StoreJson } from '../models/StoreJson'
 import { logger } from '../lib/logger'
 import { assignQuestions } from '../lib/questions'
@@ -23,9 +23,9 @@ export default class Assign implements commandInterFace {
 
     async assignData(args: arg.DefaultArgs): Promise<any> {
         const filePath = args.filePath
-        const storeJsonFactory = new StoreJsonFactory(filePath)
+        const storeJsonFactory = new StoreJsonBuilder(filePath)
         // Reading a file
-        const storeJson: StoreJson = await storeJsonFactory.factoryStoreJson()
+        const storeJson: StoreJson = await storeJsonFactory.build()
 
         const variables = storeJson.getVariableName()
         const questions: QuestionCollection = assignQuestions(variables)

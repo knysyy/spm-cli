@@ -4,7 +4,7 @@ import inquirer, { QuestionCollection } from 'inquirer'
 import { logger } from '../lib/logger'
 import { actionRunner } from '../lib/errorHandler'
 import commandInterFace from '../lib/commandInterFace'
-import { SideFactory } from '../models/SideFactory'
+import { SideJsonBuilder } from '../models/SideJsonBuilder'
 import { SideJson } from '../models/SideJson'
 import { extractQuestions } from '../lib/questions'
 
@@ -23,9 +23,9 @@ export default class Extract implements commandInterFace {
 
     async extractJson(args: arg.DefaultArgs): Promise<any> {
         const filePath = args.filePath
-        const sideFactory = new SideFactory(filePath)
+        const sideFactory = new SideJsonBuilder(filePath)
         // Reading a file
-        const sideJson: SideJson = await sideFactory.factorySideJson()
+        const sideJson: SideJson = await sideFactory.build()
 
         const choices = sideJson.getTestsName()
         const questions: QuestionCollection = extractQuestions(choices)
